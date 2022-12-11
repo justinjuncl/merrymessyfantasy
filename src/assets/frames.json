@@ -1,0 +1,485 @@
+[
+  {
+    "id": "1-1",
+    "artist": "김은정",
+    "title": "마음 조각",
+    "materials": "장지, 순지에 아크릴릭, 분채, 먹, 수채",
+    "size": "가변설치"
+  },
+  {
+    "id": "2-1",
+    "artist": "김지연",
+    "title": "서천으로",
+    "materials": "장지에 먹, 분채, 금분",
+    "size": "45.5×65.1cm"
+  },
+  {
+    "id": "2-2",
+    "artist": "김지연",
+    "title": "피살이꽃물에서",
+    "materials": "장지에 먹, 분채, 금분",
+    "size": "90.9×65.1cm"
+  },
+  {
+    "id": "2-3",
+    "artist": "김지연",
+    "title": "첨벙첨벙",
+    "materials": "장지에 먹, 분채, 금분",
+    "size": "45.5×65.1cm"
+  },
+  {
+    "id": "2-4",
+    "artist": "김지연",
+    "title": "꽃따러가자",
+    "materials": "장지에 먹, 분채, 금분",
+    "size": "45.5×65.1cm"
+  },
+  {
+    "id": "2-5",
+    "artist": "김지연",
+    "title": "달맞이굴, 뼈살이꽃, 혼살이꽃",
+    "materials": "장지에 먹, 분채, 금분",
+    "size": "90.9×65.1cm"
+  },
+  {
+    "id": "2-6",
+    "artist": "김지연",
+    "title": "개울놀이",
+    "materials": "장지에 먹, 분채, 금분",
+    "size": "90.9×65.1cm"
+  },
+  {
+    "id": "2-7",
+    "artist": "김지연",
+    "title": "대롱대롱",
+    "materials": "장지에 먹, 분채, 금분",
+    "size": "45.5×65.1cm"
+  },
+  {
+    "id": "2-8",
+    "artist": "김지연",
+    "title": "끝으로",
+    "materials": "장지에 먹, 분채, 금분",
+    "size": "90.9×65.1cm"
+  },
+  {
+    "id": "3-1",
+    "artist": "우연주",
+    "title": "Blue-go-round",
+    "materials": "캔버스에 유채",
+    "size": "193.9×112.1cm"
+  },
+  {
+    "id": "3-2",
+    "artist": "우연주",
+    "title": "ㅁㅏㅇㅡㅁ",
+    "materials": "캔버스에 유채",
+    "size": "90.9×116.7cm"
+  },
+  {
+    "id": "3-3",
+    "artist": "우연주",
+    "title": "ㅁㅏㅇㅡㅁ2",
+    "materials": "캔버스에 유채",
+    "size": "90.9×116.7cm"
+  },
+  {
+    "id": "3-4",
+    "artist": "우연주",
+    "title": "ㅁㅏㅇㅡㅁ3",
+    "materials": "캔버스에 유채",
+    "size": "90.9×116.7cm"
+  },
+  {
+    "id": "3-5",
+    "artist": "우연주",
+    "title": "ㅁㅏㅇㅡㅁ4",
+    "materials": "캔버스에 유채",
+    "size": "90.9×116.7cm"
+  },
+  {
+    "id": "3-6",
+    "artist": "우연주",
+    "title": "Hug me",
+    "materials": "캔버스에 유채",
+    "size": "116.7×72.7cm"
+  },
+  {
+    "id": "4-1",
+    "artist": "전미정",
+    "title": "마음에서 일어나는 일",
+    "materials": "캔버스에 템페라",
+    "size": "40.9×31.8cm"
+  },
+  {
+    "id": "4-2",
+    "artist": "전미정",
+    "title": "마음의 근육",
+    "materials": "캔버스에 템페라",
+    "size": "40.9×31.8cm"
+  },
+  {
+    "id": "4-3",
+    "artist": "전미정",
+    "title": "미정의 흐름",
+    "materials": "캔버스에 템페라",
+    "size": "40.9×31.8cm"
+  },
+  {
+    "id": "4-4",
+    "artist": "전미정",
+    "title": "출발",
+    "materials": "캔버스에 템페라",
+    "size": "60.6×50cm"
+  },
+  {
+    "id": "4-5",
+    "artist": "전미정",
+    "title": "볕을 선물하고 싶은 거예요",
+    "materials": "캔버스에 템페라",
+    "size": "31.8×40.9cm"
+  },
+  {
+    "id": "4-6",
+    "artist": "전미정",
+    "title": "불투명하고 구겨진 유리",
+    "materials": "캔버스에 템페라",
+    "size": "60.6×50cm"
+  },
+  {
+    "id": "4-7",
+    "artist": "전미정",
+    "title": "절벽에서 떨어졌다",
+    "materials": "캔버스에 템페라",
+    "size": "40.9×31.8cm"
+  },
+  {
+    "id": "4-8",
+    "artist": "전미정",
+    "title": "침대와 부서진 잔해",
+    "materials": "캔버스에 템페라, 오일 파스텔",
+    "size": "40.9×31.8cm"
+  },
+  {
+    "id": "4-9",
+    "artist": "전미정",
+    "title": "엮여 지탱하는 해바라기",
+    "materials": "캔버스에 템페라, 실",
+    "size": "60.6×50cm"
+  },
+  {
+    "id": "4-10",
+    "artist": "전미정",
+    "title": "남은 빛",
+    "materials": "캔버스에 템페라",
+    "size": "40.9×31.8cm"
+  },
+  {
+    "id": "4-11",
+    "artist": "전미정",
+    "title": "나를 안으려다 너를 안게 되었다",
+    "materials": "캔버스에 템페라",
+    "size": "60.6×50cm"
+  },
+  {
+    "id": "4-12",
+    "artist": "전미정",
+    "title": "온유한 계절",
+    "materials": "나무판넬에 템페라, 금박",
+    "size": "53×72.7cm"
+  },
+  {
+    "id": "4-13",
+    "artist": "전미정",
+    "title": "The last puzzle of the incomplete eternity",
+    "materials": "나무판넬에 템페라, 금박, 모래",
+    "size": "91×116.8cm"
+  },
+  {
+    "id": "4-14",
+    "artist": "전미정",
+    "title": "Mayday, Meiday",
+    "materials": "캔버스에 템페라",
+    "size": "60.6×50cm"
+  },
+  {
+    "id": "4-15",
+    "artist": "전미정",
+    "title": "둥둥",
+    "materials": "샤에 아교",
+    "size": "가변설치"
+  },
+  {
+    "id": "5-1",
+    "artist": "전찬호",
+    "title": "수파 (守破)",
+    "materials": "한지에 먹",
+    "size": "72.7×116.8cm"
+  },
+  {
+    "id": "5-2",
+    "artist": "전찬호",
+    "title": "67°0'17.3628\"X 149°37’17.4023\"Y",
+    "materials": "디지털 잉크젯 프린트",
+    "size": "90×90cm"
+  },
+  {
+    "id": "5-3",
+    "artist": "전찬호",
+    "title": "68°0'17.3654\"X 58°23’22.1422\"Y",
+    "materials": "디지털 잉크젯 프린트",
+    "size": "90×90cm"
+  },
+  {
+    "id": "5-4",
+    "artist": "전찬호",
+    "title": "69°0'17.3708\"X 90°49'17.4255\"Y",
+    "materials": "디지털 잉크젯 프린트",
+    "size": "90×90cm"
+  },
+  {
+    "id": "5-5",
+    "artist": "전찬호",
+    "title": "71°0'17.3747\"X 91°46'17.4619\"Y",
+    "materials": "디지털 잉크젯 프린트",
+    "size": "90×90cm"
+  },
+  {
+    "id": "5-6",
+    "artist": "전찬호",
+    "title": "아와 어 사이 (71°0'18.2446\"X 195°73’13.2343”Y)",
+    "materials": "디지털 잉크젯 프린트",
+    "size": "가변설치"
+  },
+  {
+    "id": "5-7",
+    "artist": "전찬호",
+    "title": "Speak in blockchain",
+    "materials": "감열지, 신경망 기반 보코더, GAN 등 혼합매체",
+    "size": "가변설치"
+  },
+  {
+    "id": "5-8",
+    "artist": "전찬호",
+    "title": "Proof of work",
+    "materials": "혼합매체",
+    "size": "가변설치"
+  },
+  {
+    "id": "6-1",
+    "artist": "곽노연",
+    "title": "처음",
+    "materials": "장지에 분채, 먹",
+    "size": "116.8×91cm"
+  },
+  {
+    "id": "6-2",
+    "artist": "곽노연",
+    "title": "나의 검은 개",
+    "materials": "장지에 분채, 먹",
+    "size": "116.8×91cm"
+  },
+  {
+    "id": "6-3",
+    "artist": "곽노연",
+    "title": "진공상태",
+    "materials": "장지에 분채, 먹",
+    "size": "91×116.8cm"
+  },
+  {
+    "id": "6-4",
+    "artist": "곽노연",
+    "title": "늪",
+    "materials": "장지에 분채, 먹",
+    "size": "116.8×91cm"
+  },
+  {
+    "id": "7-1",
+    "artist": "남지원",
+    "title": "나라는 것",
+    "materials": "3배접 장지에 분채",
+    "size": "91×116.8cm"
+  },
+  {
+    "id": "7-2",
+    "artist": "남지원",
+    "title": "나비가 앉은 자리",
+    "materials": "3배접 장지에 분채",
+    "size": "116.8×91cm"
+  },
+  {
+    "id": "7-3",
+    "artist": "남지원",
+    "title": "위로1",
+    "materials": "3배접 장지에 분채",
+    "size": "97×162.2cm"
+  },
+  {
+    "id": "7-4",
+    "artist": "남지원",
+    "title": "위로2",
+    "materials": "3배접 장지에 분채",
+    "size": "97×162.2cm"
+  },
+  {
+    "id": "8-1",
+    "artist": "박홍도",
+    "title": "ㄱㄱㄱㄱㄱㄱ",
+    "materials": "캔버스에 유채",
+    "size": "160×130cm"
+  },
+  {
+    "id": "8-2",
+    "artist": "박홍도",
+    "title": "ㅇㅇㅇㅇㅇㅇ",
+    "materials": "캔버스에 유채",
+    "size": "160×130cm"
+  },
+  {
+    "id": "8-3",
+    "artist": "박홍도",
+    "title": "ㄴㄴㄴㄴㄴㄴ",
+    "materials": "캔버스에 유채",
+    "size": "160×130cm"
+  },
+  {
+    "id": "9-1",
+    "artist": "백선영",
+    "title": "Birthday Party",
+    "materials": "캔버스에 아크릴릭",
+    "size": "130.3×162.2cm"
+  },
+  {
+    "id": "9-2",
+    "artist": "백선영",
+    "title": "My Worrying Doll",
+    "materials": "캔버스에 아크릴릭",
+    "size": "162.2×130.3cm"
+  },
+  {
+    "id": "9-3",
+    "artist": "백선영",
+    "title": "건널목에 서서",
+    "materials": "캔버스에 아크릴릭",
+    "size": "162.2×130.3cm"
+  },
+  {
+    "id": "10-1",
+    "artist": "이소정",
+    "title": "Mother of Pearl Fracture",
+    "materials": "옻칠에 자개",
+    "size": "120×67cm"
+  },
+  {
+    "id": "10-2",
+    "artist": "이소정",
+    "title": "How the Temporary Immortalized",
+    "materials": "부표에 삼베, 옻칠",
+    "size": "가변설치"
+  },
+  {
+    "id": "11-1",
+    "artist": "소범수",
+    "title": "실제로는 정신이 안 나갔어. 근데 정신 나간다는 게 어떤 거지?",
+    "materials": "캔버스에 아크릴릭, 구아슈",
+    "size": "112×163cm"
+  },
+  {
+    "id": "11-2",
+    "artist": "소범수",
+    "title": "물에 푹 젖은 스펀지를 두드리는 것 같았어.",
+    "materials": "캔버스에 아크릴릭, 구아슈",
+    "size": "190×150cm"
+  },
+  {
+    "id": "12-1",
+    "artist": "이예원",
+    "title": "Gray days",
+    "materials": "종이에 연필",
+    "size": "가변설치"
+  },
+  {
+    "id": "13-1",
+    "artist": "임성희",
+    "title": "감시자",
+    "materials": "장지에 잉크, UV잉크, 분채",
+    "size": "116.8×91cm"
+  },
+  {
+    "id": "13-2",
+    "artist": "임성희",
+    "title": "불가피한 나태",
+    "materials": "장지에 잉크, UV잉크, 분채",
+    "size": "91×116.8cm"
+  },
+  {
+    "id": "13-3",
+    "artist": "임성희",
+    "title": "욕망이 그린 세상",
+    "materials": "모시에 염색, 먹",
+    "size": "지름 170cm"
+  },
+  {
+    "id": "14-1",
+    "artist": "장서윤",
+    "title": "방",
+    "materials": "캔버스에 유채",
+    "size": "162.2×130.3cm"
+  },
+  {
+    "id": "14-2",
+    "artist": "장서윤",
+    "title": "개",
+    "materials": "캔버스에 유채",
+    "size": "130.3×162.2cm"
+  },
+  {
+    "id": "14-3",
+    "artist": "장서윤",
+    "title": "15층",
+    "materials": "캔버스에 유채",
+    "size": "60.6×50cm"
+  },
+  {
+    "id": "15-1",
+    "artist": "마벨",
+    "title": "phases of vanus",
+    "materials": "MDF에 폴리머, 아크릴릭, 유채, 유리",
+    "size": "75×71×40cm"
+  },
+  {
+    "id": "15-2",
+    "artist": "마벨, 올리버 이그나티우스",
+    "title": "memories of life: in places that are now empty",
+    "materials": "프로크리에이트, 사운드",
+    "size": "25×25cm 64pcs"
+  },
+  {
+    "id": "16-1",
+    "artist": "손도희",
+    "title": "사고, 사고",
+    "materials": "WebGL기반 혼합매체",
+    "size": "가변설치"
+  },
+  {
+    "id": "17-1",
+    "artist": "이서희",
+    "title": "uncanny valley.",
+    "materials": "캔버스에 유채",
+    "size": "193.9×130.3cm"
+  },
+  {
+    "id": "17-2",
+    "artist": "이서희",
+    "title": "uncanny valley..",
+    "materials": "캔버스에 유채",
+    "size": "193.9×130.3cm"
+  },
+  {
+    "id": "17-3",
+    "artist": "이서희",
+    "title": "uncanny valley...",
+    "materials": "캔버스에 유채",
+    "size": "193.9×130.3cm"
+  }
+]
