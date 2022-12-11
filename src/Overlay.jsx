@@ -5,7 +5,7 @@ import KU_LOGO from "assets/ku.svg";
 export const Overlay = () => {
     return (
         <div className="overlay">
-            <a href="/" style={{ textAlign: 'right', position: 'absolute', top: 50, right: 100 }}>
+            <a href="/" style={{ fontWeight: 'bold', textAlign: 'right', position: 'absolute', top: 50, right: 100 }}>
                 Merry<br />Messy<br />Fantasy
             </a>
             <div style={{ display: 'flex', gap: 10, position: 'absolute', bottom: 50, right: 100 }}>

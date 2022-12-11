@@ -1,10 +1,4 @@
 import * as THREE from "three";
-import { MeshLine, MeshLineMaterial, MeshLineRaycast } from "MeshLine";
-
-import { Line2 } from 'three/examples/jsm/lines/Line2.js';
-import { LineSegments2 } from "three/examples/jsm/lines/LineSegments2";
-import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
-import { LineSegmentsGeometry } from "three/examples/jsm/lines/LineSegmentsGeometry";
 
 import { useRef, useState, useEffect, useMemo, Suspense } from "react";
 import { extend, Canvas, useThree, useFrame } from "@react-three/fiber";
@@ -21,15 +15,15 @@ import MUSEUM from "assets/museum.glb";
 import MUSEUM_LINES from "assets/museum-lines.glb";
 import FRAMES from "assets/frames.json";
 import LOREM from "assets/lorem.json";
+import { LineBasicMaterial } from "three";
 
 const COLOR_BACKGROUND = 0x111111;
 const COLOR_MODEL = 0x111111;
 const COLOR_LINES = 0xb0bec5;
 const COLOR_SHADOW = 0x2c2e2f;
 
-// extend({ MeshLine, MeshLineMaterial });
-extend({ LineSegments2 });
 useGLTF.preload(MUSEUM);
+useGLTF.preload(MUSEUM_LINES);
 
 function ImageHTML({ index, id, url }) {
     const visible = useRef(false)
@@ -105,49 +99,22 @@ const Frames = (props) => {
 const Museum = () => {
     const groupRef = useRef();
 
-    const { scene: lineScene, materials: lineMaterials } = useGLTF(MUSEUM_LINES);
-
+    const { nodes: lineNodes } = useGLTF(MUSEUM_LINES);
     const { scene, nodes, animations, materials } = useGLTF(MUSEUM);
     const { actions } = useAnimations(animations, groupRef);
 
     const { scroll, el } = useScroll();
 
-    let edgeSceneMaterial = new LineMaterial({
-        color: 0xff0000,
-        linewidth: 5,
-        vertexColors: true,
-        //resolution:  // to be set by renderer, eventually
-        dashed: false,
-        alphaToCoverage: true,
-    });
-    // edgeSceneMaterial.resolution.set(window.innerWidth, window.innerHeight);
-
-    let [edgeSceneGeometry, ls2] = useMemo(() => {
-        lineScene.traverse(child => {
-            if (child.type === "Mesh") {
-                lineScene.remove(child);
-            }
-            if (child.name === "base001_2") {
-                let geom = new LineSegmentsGeometry().fromLineSegments(child);
-                let ls2 = new LineSegments2(geom);
-                ls2.computeLineDistances();
-                console.log(ls2);
-                return [geom, ls2];
-            }
-        });
-
-        let geom = new LineSegmentsGeometry();
-        return [geom, new LineSegments2(geom)];
-    }, [lineScene]);
-
     useEffect(() => {
         actions["Action"].play().paused = true;
         Object.values(materials).forEach(material => {
-            material.opacity = 0.4;
+            material.opacity = 0.7;
             material.transparent = true;
             material.depthTest = true;
             material.flatShading = true;
             material.color.set(0x000000);
+            material.polygonOffset = true;
+            material.polygonOffsetFactor = 1;
         });
     }, [actions, materials]);
 
@@ -171,45 +138,28 @@ const Museum = () => {
         return newScene;
     }, [scene])
 
-    // const [originalModel, conditionalModel, edgesModel, backgroundModel, shadowModel] = useMemo(() => {
-    //     return LineMaterial.generateModel(scene);
-    // }, [scene]);
-
-    let lineSegments2Ref = useRef();
-    useEffect(() => {
-        console.log(lineSegments2Ref.current)
-    })
-
     return (
         <group ref={groupRef} dispose={null}>
-            <mesh>
-                <boxGeometry args={[10, 10, 10]} />
-                <meshStandardMaterial color={'orange'} />
-            </mesh>
-
-            {/* <primitive object={lineScene} /> */}
-            <primitive object={newScene} />
-            {ls2 && <primitive object={ls2} />}
-
-            <lineSegments2 ref={lineSegments2Ref} args={[edgeSceneGeometry, edgeSceneMaterial]} />
             {/* <mesh> */}
-            {/*     <meshLine ref={meshLineRef} attach="geometry" /> */}
-            {/*     <meshLineMaterial */}
-            {/*         attach="material" */}
-            {/*         transparent */}
-            {/*         depthTest={false} */}
-            {/*         lineWidth={1} */}
-            {/*         color={new THREE.Color(0x00ffff)} */}
-            {/*         dashArray={0.05} */}
-            {/*         dashRatio={0.95} */}
-            {/*     /> */}
+            {/*     <boxGeometry args={[10, 10, 10]} /> */}
+            {/*     <meshStandardMaterial color={'orange'} /> */}
             {/* </mesh> */}
 
-            {/* <primitive object={originalModel} /> */}
-            {/* <primitive object={conditionalModel} /> */}
-            {/* <primitive object={edgesModel} /> */}
-            {/* <primitive object={backgroundModel} /> */}
-            {/* <primitive object={shadowModel} /> */}
+            <primitive object={newScene} />
+            {/* <primitive object={lineScene} /> */}
+
+            <lineSegments
+                name="base001_2"
+                geometry={lineNodes.base001_2.geometry}
+                material={new LineBasicMaterial({
+                    color: 0xff1101,
+                    depthTest: true,
+                    transparent: false,
+                    opacity: 0.2,
+                    dashed: false
+                })}
+            />
+
             <group name="Camera">
                 <PerspectiveCamera makeDefault fov={90}>
                 </PerspectiveCamera>
