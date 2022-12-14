@@ -1,10 +1,13 @@
 import * as THREE from "three";
 
 import { useRef, useState, useEffect, useMemo, Suspense } from "react";
-import { extend, Canvas, useThree, useFrame } from "@react-three/fiber";
+import { extend, Canvas, useThree, useFrame, invalidate } from "@react-three/fiber";
 import { useIntersect, Image, PerspectiveCamera, FirstPersonControls, useGLTF, useAnimations, ArcballControls, Html, Scroll, useScroll, ScrollControls } from "@react-three/drei";
 
-// import * as LineMaterial from "LineMaterial";
+import { LineBasicMaterial, Vector3 } from "three";
+import { easing } from 'maath';
+
+import { useInterval } from "Utils";
 import { Overlay } from "Overlay";
 import { artistsOrder } from "assets/artistsOrder";
 
@@ -15,7 +18,6 @@ import MUSEUM from "assets/museum.glb";
 import MUSEUM_LINES from "assets/museum-lines.glb";
 import FRAMES from "assets/frames.json";
 import LOREM from "assets/lorem.json";
-import { LineBasicMaterial } from "three";
 
 const COLOR_BACKGROUND = 0x111111;
 const COLOR_MODEL = 0x111111;
@@ -95,9 +97,11 @@ const Frames = (props) => {
         </>
     );
 }
-
+const _p = new THREE.Vector3();
 const Museum = () => {
     const groupRef = useRef();
+
+    const camera = useThree((state) => state.camera);
 
     const { nodes: lineNodes } = useGLTF(MUSEUM_LINES);
     const { scene, nodes, animations, materials } = useGLTF(MUSEUM);
@@ -105,8 +109,59 @@ const Museum = () => {
 
     const { scroll, el } = useScroll();
 
+    let frames = useMemo(() => {
+        let frames = {};
+        Object.values(nodes).forEach(node => {
+            if (node.name.startsWith("frame")) {
+                frames[node.name] = {
+                    position: node.position,
+                    quaternion: node.quaternion
+                };
+            }
+        });
+
+        let { position: p, quaternion: q } = Object.values(frames)[0];
+        _p.copy(p).add(new Vector3(0, 0, 3).applyQuaternion(q));
+
+        camera.position.lerp(_p, 1);
+        camera.quaternion.slerp(q, 1);
+        camera.updateWorldMatrix();
+
+        return frames;
+    }, [nodes, camera]);
+
+    const [count, setCount] = useState(0);
+    // const [delay,] = useState(5000);
+    // const [isPlaying,] = useState(true);
+
+    // useInterval(
+    //     () => {
+    //         setCount(count + 1);
+    //         console.log(count);
+    //     },
+    //     isPlaying ? delay : null,
+    // )
+
+    useFrame((state, dt) => {
+        // actions["Action"].time = THREE.MathUtils.lerp(actions["Action"].time, actions["Action"].getClip().duration * scroll.current, 0.05);
+
+        let { position: p, quaternion: q } = Object.values(frames)[count];
+        _p.copy(p).add(new Vector3(0, 0, 3).applyQuaternion(q));
+
+        easing.damp3(state.camera.position, _p, 0.4, dt)
+        easing.dampQ(state.camera.quaternion, q, 0.4, dt)
+    })
+
     useEffect(() => {
-        actions["Action"].play().paused = true;
+        const pageCount = 72;
+        el.onscroll = (e) => {
+            let currentPageNumber = Math.floor(scroll.current * pageCount + 0.5);
+            setCount(Math.max(0, currentPageNumber - 2));
+        }
+    }, [el, scroll]);
+
+    useEffect(() => {
+        // actions["Action"].play().paused = true;
         Object.values(materials).forEach(material => {
             material.opacity = 0.7;
             material.transparent = true;
@@ -118,45 +173,30 @@ const Museum = () => {
         });
     }, [actions, materials]);
 
-    useFrame((state) => {
-        actions["Action"].time = THREE.MathUtils.lerp(actions["Action"].time, actions["Action"].getClip().duration * scroll.current, 0.05);
-    })
-
-    useEffect(() => Object.values(nodes).forEach((node) => (node.receiveShadow = node.castShadow = true)));
-
-    // useEffect(() => {
-    //     el.onscroll = (e) => {
-    //         console.log(el, e);
-    //     }
-    // }, [el]);
-
     const newScene = useMemo(() => {
         let newScene = scene.clone();
         let cameraObject = newScene.getObjectByName("Camera");
         if (cameraObject !== null)
             newScene.remove(cameraObject);
         return newScene;
-    }, [scene])
+    }, [scene]);
 
     return (
         <group ref={groupRef} dispose={null}>
-            {/* <mesh> */}
-            {/*     <boxGeometry args={[10, 10, 10]} /> */}
-            {/*     <meshStandardMaterial color={'orange'} /> */}
-            {/* </mesh> */}
-
             <primitive object={newScene} />
-            {/* <primitive object={lineScene} /> */}
+
+            {Object.values(frames).map((frame, i) => (
+                <group key={i} position={frame.position} quaternion={frame.quaternion}>
+                    <axesHelper />
+                </group>
+            ))}
 
             <lineSegments
-                name="base001_2"
                 geometry={lineNodes.base001_2.geometry}
                 material={new LineBasicMaterial({
                     color: 0xff1101,
-                    depthTest: true,
                     transparent: false,
                     opacity: 0.2,
-                    dashed: false
                 })}
             />
 
