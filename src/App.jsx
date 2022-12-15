@@ -3,8 +3,11 @@ import * as THREE from "three";
 import { useRef, useState, useEffect, useMemo, Suspense } from "react";
 import { extend, Canvas, useThree, useFrame, invalidate } from "@react-three/fiber";
 import { useIntersect, Image, PerspectiveCamera, FirstPersonControls, useGLTF, useAnimations, ArcballControls, Html, Scroll, useScroll, ScrollControls } from "@react-three/drei";
+import { useSpring, animated } from "@react-spring/three";
 
-import { LineBasicMaterial, Vector3 } from "three";
+import { InView, useInView } from 'react-intersection-observer';
+
+import { LineBasicMaterial } from "three";
 import { easing } from 'maath';
 
 import { useInterval } from "Utils";
@@ -18,6 +21,7 @@ import MUSEUM from "assets/museum.glb";
 import MUSEUM_LINES from "assets/museum-lines.glb";
 import FRAMES from "assets/frames.json";
 import LOREM from "assets/lorem.json";
+import { useFrameStore } from "Store";
 
 const COLOR_BACKGROUND = 0x111111;
 const COLOR_MODEL = 0x111111;
@@ -44,26 +48,34 @@ function ImageHTML({ index, id, url }) {
 
 function FrameHTML({ index, offset, id, artist, title, materials, size }) {
     const divStyle = {
-        position: 'absolute',
-        top: `${(index + offset) * 100}vh`,
-        color: 'white',
+        position: 'relative',
         margin: '20px',
         width: '100vw',
         height: '100vh',
     };
 
+    const setCurrentFrame = useFrameStore(state => state.setCurrentFrame);
+    const { ref, inView, entry } = useInView({
+        threshold: 0,
+        onChange: () => (inView && setCurrentFrame(index))
+    });
+
     return (
         <div style={divStyle}>
-            <div>{id}</div>
-            <div>{artist}</div>
-            <div>{title}</div>
-            <div>{materials}</div>
-            <div>{size}</div>
-            {/* <div style={{ */}
-            {/*     height: "50%", */}
-            {/*     width: "50%", */}
-            {/*     overflow: 'auto' */}
-            {/* }}>{LOREM.text}</div> */}
+            <div ref={ref} style={{
+                position: 'sticky',
+            }}>
+                <div>{id}</div>
+                <div>{artist}</div>
+                <div>{title}</div>
+                <div>{materials}</div>
+                <div>{size}</div>
+                {/* <div style={{ */}
+                {/*     height: "50%", */}
+                {/*     width: "50%", */}
+                {/*     overflow: 'auto' */}
+                {/* }}>{LOREM.text}</div> */}
+            </div>
         </div>
     );
 }
@@ -92,7 +104,7 @@ const Frames = (props) => {
     return (
         <>
             {frameElements.map((frame, index) => (
-                <FrameHTML key={index} index={index} offset={3} {...frame} />
+                <FrameHTML key={index} index={index + 3} offset={3} {...frame} />
             ))}
         </>
     );
@@ -107,7 +119,7 @@ const Museum = () => {
     const { scene, nodes, animations, materials } = useGLTF(MUSEUM);
     const { actions } = useAnimations(animations, groupRef);
 
-    const { scroll, el } = useScroll();
+    // const { scroll, el } = useScroll();
 
     let frames = useMemo(() => {
         let frames = {};
@@ -115,13 +127,14 @@ const Museum = () => {
             if (node.name.startsWith("frame")) {
                 frames[node.name] = {
                     position: node.position,
-                    quaternion: node.quaternion
+                    quaternion: node.quaternion,
+                    distance: Math.random() * 2 + 2
                 };
             }
         });
 
-        let { position: p, quaternion: q } = Object.values(frames)[0];
-        _p.copy(p).add(new Vector3(0, 0, 3).applyQuaternion(q));
+        let { position: p, quaternion: q, distance: d } = Object.values(frames)[0];
+        _p.copy(p).add(new THREE.Vector3(0, 0, d).applyQuaternion(q));
 
         camera.position.lerp(_p, 1);
         camera.quaternion.slerp(q, 1);
@@ -130,7 +143,9 @@ const Museum = () => {
         return frames;
     }, [nodes, camera]);
 
-    const [count, setCount] = useState(0);
+    const currentFrame = useFrameStore(state => state.currentFrame);
+
+    // const [count, setCount] = useState(0);
     // const [delay,] = useState(5000);
     // const [isPlaying,] = useState(true);
 
@@ -145,20 +160,20 @@ const Museum = () => {
     useFrame((state, dt) => {
         // actions["Action"].time = THREE.MathUtils.lerp(actions["Action"].time, actions["Action"].getClip().duration * scroll.current, 0.05);
 
-        let { position: p, quaternion: q } = Object.values(frames)[count];
-        _p.copy(p).add(new Vector3(0, 0, 3).applyQuaternion(q));
+        let { position: p, quaternion: q, distance: d } = Object.values(frames)[currentFrame];
+        _p.copy(p).add(new THREE.Vector3(0, 0, d).applyQuaternion(q));
 
         easing.damp3(state.camera.position, _p, 0.4, dt)
         easing.dampQ(state.camera.quaternion, q, 0.4, dt)
     })
 
-    useEffect(() => {
-        const pageCount = 72;
-        el.onscroll = (e) => {
-            let currentPageNumber = Math.floor(scroll.current * pageCount + 0.5);
-            setCount(Math.max(0, currentPageNumber - 2));
-        }
-    }, [el, scroll]);
+    // useEffect(() => {
+    //     const pageCount = 72;
+    //     el.onscroll = (e) => {
+    //         let currentPageNumber = Math.floor(scroll.current * pageCount + 0.5);
+    //         setCount(Math.max(0, currentPageNumber - 2));
+    //     }
+    // }, [el, scroll]);
 
     useEffect(() => {
         // actions["Action"].play().paused = true;
@@ -181,9 +196,17 @@ const Museum = () => {
         return newScene;
     }, [scene]);
 
+    const [active, setActive] = useState(true);
+
+    const springs = useSpring({
+        color: active ? '#ff5500' : '#00ff55',
+        pos: active ? [0, 0, 2] : [0, 0, 0],
+        config: { mass: 10, tension: 1000, friction: 300, precision: 0.00001 }
+    })
+
     return (
-        <group ref={groupRef} dispose={null}>
-            <primitive object={newScene} />
+        <group ref={groupRef} dispose={null} >
+            <primitive object={newScene} onClick={() => setActive(a => !a)} />
 
             {Object.values(frames).map((frame, i) => (
                 <group key={i} position={frame.position} quaternion={frame.quaternion}>
@@ -193,12 +216,9 @@ const Museum = () => {
 
             <lineSegments
                 geometry={lineNodes.base001_2.geometry}
-                material={new LineBasicMaterial({
-                    color: 0xff1101,
-                    transparent: false,
-                    opacity: 0.2,
-                })}
-            />
+            >
+                <animated.lineBasicMaterial attach="material" color={springs.color} />
+            </lineSegments>
 
             <group name="Camera">
                 <PerspectiveCamera makeDefault fov={90}>
@@ -209,6 +229,8 @@ const Museum = () => {
 }
 
 const Scene = () => {
+    const setCurrentFrame = useFrameStore(state => state.setCurrentFrame);
+
     return (
         <Canvas
             frameloop="demand"
@@ -248,10 +270,22 @@ const Scene = () => {
                     {/* </group> */}
                 </Scroll>
                 <Scroll html>
+                    <div style={{ height: '100vh' }}>
+                        <InView onChange={(inView, entry) => inView && setCurrentFrame(0)}>
+                            <h1 style={{ margin: '20px' }}>first page</h1>
+                        </InView>
+                    </div>
+                    <div style={{ height: '100vh' }}>
+                        <InView onChange={(inView, entry) => inView && setCurrentFrame(1)}>
+                            <h1 style={{ margin: '20px' }}>second page</h1>
+                        </InView>
+                    </div>
+                    <div style={{ height: '100vh' }}>
+                        <InView onChange={(inView, entry) => inView && setCurrentFrame(2)}>
+                            <h1 style={{ margin: '20px' }}>third page</h1>
+                        </InView>
+                    </div>
                     <Frames />
-                    <h1 style={{ position: 'absolute', top: '0vh', color: 'white', margin: '20px' }}>first page</h1>
-                    <h1 style={{ position: 'absolute', top: '100vh', color: 'white', margin: '20px' }}>second page</h1>
-                    <h1 style={{ position: 'absolute', top: '200vh', color: 'white', margin: '20px' }}>third page</h1>
                 </Scroll>
             </ScrollControls>
 
