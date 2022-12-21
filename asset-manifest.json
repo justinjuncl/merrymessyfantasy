@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.cf4a121b.css",
+    "main.js": "/static/js/main.eb11cd7c.js",
+    "static/js/787.a86f3764.chunk.js": "/static/js/787.a86f3764.chunk.js",
+    "static/media/museum.glb": "/static/media/museum.673579649d7fa3eda6b6.glb",
+    "static/media/museum-lines.glb": "/static/media/museum-lines.cd7319c65409a87b98f2.glb",
+    "static/media/ku.svg": "/static/media/ku.002f2b5d1e912865387a85a235e1051a.svg",
+    "index.html": "/index.html",
+    "main.cf4a121b.css.map": "/static/css/main.cf4a121b.css.map",
+    "main.eb11cd7c.js.map": "/static/js/main.eb11cd7c.js.map",
+    "787.a86f3764.chunk.js.map": "/static/js/787.a86f3764.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cf4a121b.css",
+    "static/js/main.eb11cd7c.js"
+  ]
+}
