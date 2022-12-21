@@ -2,6 +2,7 @@
     "name": "kufa",
     "version": "2021.0",
     "private": true,
+    "homepage": "https://justinjuncl.github.io/kufa",
     "dependencies": {
         "@react-spring/three": "^9.6.0",
         "@react-three/drei": "^8.8.3",
@@ -24,7 +25,9 @@
     "scripts": {
         "start": "react-app-rewired start",
         "build": "react-app-rewired build",
-        "test": "react-app-rewired test"
+        "test": "react-app-rewired test",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build"
     },
     "eslintConfig": {
         "extends": [
@@ -45,6 +48,7 @@
         ]
     },
     "devDependencies": {
+        "gh-pages": "^4.0.0",
         "html-loader": "^4.2.0",
         "react-app-rewired": "^2.2.1"
     }
