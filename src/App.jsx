@@ -241,6 +241,14 @@ const Museum = () => {
 
 const Scene = () => {
     const setCurrentFrame = useGlobalStore(state => state.setCurrentFrame);
+    const [darkMode, setDarkMode] = useState(true);
+
+    const springs = useSpring({
+        color: darkMode ? COLOR_BACKGROUND : 0xFFFFFF,
+        config: { mass: 10, tension: 1000, friction: 300, precision: 0.00001 }
+    });
+
+    console.log(springs.color);
 
     return (
         <Canvas
@@ -249,7 +257,7 @@ const Scene = () => {
             shadowMap
             camera={{ position: [-5, 2, 10], fov: 60 }}>
 
-            <color attach="background" args={[COLOR_BACKGROUND]} />
+            <animated.color attach="background" args={[springs.color]} />
 
             <ambientLight intensity={0.3} />
 
@@ -283,17 +291,24 @@ const Scene = () => {
                 <Scroll html>
                     <div style={{ height: '100vh' }}>
                         <InView onChange={(inView, entry) => inView && setCurrentFrame(0)}>
-                            <h1 style={{ margin: '20px' }}>first page</h1>
+                            <h1 id={"first"} style={{ margin: '20px' }}>first page</h1>
+                            <p style={{ width: "50vw" }}>{LOREM.text}</p>
                         </InView>
                     </div>
                     <div style={{ height: '100vh' }}>
-                        <InView onChange={(inView, entry) => inView && setCurrentFrame(1)}>
+                        <InView onChange={(inView, entry) => {
+                            inView && setCurrentFrame(1);
+                            console.log(1)
+                            setDarkMode(s => !s);
+                        }}>
                             <h1 style={{ margin: '20px' }}>second page</h1>
+                            <p style={{ width: "50vw" }}>{LOREM.text}</p>
                         </InView>
                     </div>
                     <div style={{ height: '100vh' }}>
                         <InView onChange={(inView, entry) => inView && setCurrentFrame(2)}>
                             <h1 style={{ margin: '20px' }}>third page</h1>
+                            <p style={{ width: "50vw" }}>{LOREM.text}</p>
                         </InView>
                     </div>
                     <Frames />

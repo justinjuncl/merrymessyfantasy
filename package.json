@@ -1,6 +1,6 @@
 {
-    "name": "test-app",
-    "version": "0.1.0",
+    "name": "kufa",
+    "version": "2021.0",
     "private": true,
     "dependencies": {
         "@react-spring/three": "^9.6.0",
