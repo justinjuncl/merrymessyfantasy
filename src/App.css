@@ -33,3 +33,7 @@
 h1 {
   position: sticky;
 }
+
+table {
+  margin: 0 auto;
+}

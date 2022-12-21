@@ -14,6 +14,8 @@ import { useInterval } from "Utils";
 import { Overlay } from "Overlay";
 import { artistsOrder } from "assets/artistsOrder";
 
+import { Statement } from "Statement";
+
 import "App.css";
 
 // import MUSEUM from "assets/example.glb";
@@ -21,7 +23,7 @@ import MUSEUM from "assets/museum.glb";
 import MUSEUM_LINES from "assets/museum-lines.glb";
 import FRAMES from "assets/frames.json";
 import LOREM from "assets/lorem.json";
-import { useFrameStore } from "Store";
+import { useGlobalStore } from "Store";
 
 const COLOR_BACKGROUND = 0x111111;
 const COLOR_MODEL = 0x111111;
@@ -50,11 +52,12 @@ function FrameHTML({ index, offset, id, artist, title, materials, size }) {
     const divStyle = {
         position: 'relative',
         margin: '20px',
+        marginTop: '200px',
         width: '100vw',
-        height: '100vh',
+        // height: '100vh',
     };
 
-    const setCurrentFrame = useFrameStore(state => state.setCurrentFrame);
+    const setCurrentFrame = useGlobalStore(state => state.setCurrentFrame);
     const { ref, inView, entry } = useInView({
         threshold: 0,
         onChange: () => (inView && setCurrentFrame(index))
@@ -70,11 +73,13 @@ function FrameHTML({ index, offset, id, artist, title, materials, size }) {
                 <div>{title}</div>
                 <div>{materials}</div>
                 <div>{size}</div>
-                {/* <div style={{ */}
-                {/*     height: "50%", */}
-                {/*     width: "50%", */}
-                {/*     overflow: 'auto' */}
-                {/* }}>{LOREM.text}</div> */}
+                <div style={{
+                    // height: "200px",
+                    width: "50%",
+                    // overflow: 'scroll'
+                }}>
+                    <Statement artist={artist} />
+                </div>
             </div>
         </div>
     );
@@ -102,11 +107,16 @@ const Frames = (props) => {
     }, []);
 
     return (
-        <>
+        <div>
             {frameElements.map((frame, index) => (
-                <FrameHTML key={index} index={index + 3} offset={3} {...frame} />
+                <FrameHTML
+                    key={index}
+                    index={index + 3}
+                    offset={3}
+                    {...frame}
+                />
             ))}
-        </>
+        </div>
     );
 }
 const _p = new THREE.Vector3();
@@ -114,6 +124,7 @@ const Museum = () => {
     const groupRef = useRef();
 
     const camera = useThree((state) => state.camera);
+    const cameraParent = camera.parent;
 
     const { nodes: lineNodes } = useGLTF(MUSEUM_LINES);
     const { scene, nodes, animations, materials } = useGLTF(MUSEUM);
@@ -136,14 +147,14 @@ const Museum = () => {
         let { position: p, quaternion: q, distance: d } = Object.values(frames)[0];
         _p.copy(p).add(new THREE.Vector3(0, 0, d).applyQuaternion(q));
 
-        camera.position.lerp(_p, 1);
-        camera.quaternion.slerp(q, 1);
-        camera.updateWorldMatrix();
+        cameraParent?.position.lerp(_p, 1);
+        cameraParent?.quaternion.slerp(q, 1);
+        cameraParent?.updateWorldMatrix();
 
         return frames;
     }, [nodes, camera]);
 
-    const currentFrame = useFrameStore(state => state.currentFrame);
+    const currentFrame = useGlobalStore(state => state.currentFrame);
 
     // const [count, setCount] = useState(0);
     // const [delay,] = useState(5000);
@@ -157,14 +168,14 @@ const Museum = () => {
     //     isPlaying ? delay : null,
     // )
 
-    useFrame((state, dt) => {
+    useFrame((_, dt) => {
         // actions["Action"].time = THREE.MathUtils.lerp(actions["Action"].time, actions["Action"].getClip().duration * scroll.current, 0.05);
 
         let { position: p, quaternion: q, distance: d } = Object.values(frames)[currentFrame];
         _p.copy(p).add(new THREE.Vector3(0, 0, d).applyQuaternion(q));
 
-        easing.damp3(state.camera.position, _p, 0.4, dt)
-        easing.dampQ(state.camera.quaternion, q, 0.4, dt)
+        easing.damp3(cameraParent?.position, _p, 0.4, dt)
+        easing.dampQ(cameraParent?.quaternion, q, 0.4, dt)
     })
 
     // useEffect(() => {
@@ -190,9 +201,9 @@ const Museum = () => {
 
     const newScene = useMemo(() => {
         let newScene = scene.clone();
-        let cameraObject = newScene.getObjectByName("Camera");
-        if (cameraObject !== null)
-            newScene.remove(cameraObject);
+        // let cameraObject = newScene.getObjectByName("Camera");
+        // if (cameraObject !== null)
+        //     newScene.remove(cameraObject);
         return newScene;
     }, [scene]);
 
@@ -215,13 +226,13 @@ const Museum = () => {
             ))}
 
             <lineSegments
-                geometry={lineNodes.base001_2.geometry}
+                geometry={lineNodes.base_lines.geometry}
             >
                 <animated.lineBasicMaterial attach="material" color={springs.color} />
             </lineSegments>
 
-            <group name="Camera">
-                <PerspectiveCamera makeDefault fov={90}>
+            <group>
+                <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0]}>
                 </PerspectiveCamera>
             </group>
         </group>
@@ -229,7 +240,7 @@ const Museum = () => {
 }
 
 const Scene = () => {
-    const setCurrentFrame = useFrameStore(state => state.setCurrentFrame);
+    const setCurrentFrame = useGlobalStore(state => state.setCurrentFrame);
 
     return (
         <Canvas
@@ -258,7 +269,7 @@ const Scene = () => {
             {/* <pointLight position={[-10, 0, -20]} intensity={0.5} /> */}
             {/* <pointLight position={[0, -10, 0]} intensity={1.5} /> */}
             <ScrollControls
-                pages={72}
+                pages={100}
                 damping={100}
                 style={{
                     background: "linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, 0) 70%"
