@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/kufa/static/css/main.6879ce84.css",
-    "main.js": "/kufa/static/js/main.46c18c2f.js",
+    "main.js": "/kufa/static/js/main.a9b3320e.js",
     "static/js/787.9d572da9.chunk.js": "/kufa/static/js/787.9d572da9.chunk.js",
     "static/media/museum.glb": "/kufa/static/media/museum.673579649d7fa3eda6b6.glb",
     "static/media/museum-lines.glb": "/kufa/static/media/museum-lines.cd7319c65409a87b98f2.glb",
     "static/media/ku.svg": "/kufa/static/media/ku.002f2b5d1e912865387a85a235e1051a.svg",
     "index.html": "/kufa/index.html",
     "main.6879ce84.css.map": "/kufa/static/css/main.6879ce84.css.map",
-    "main.46c18c2f.js.map": "/kufa/static/js/main.46c18c2f.js.map",
+    "main.a9b3320e.js.map": "/kufa/static/js/main.a9b3320e.js.map",
     "787.9d572da9.chunk.js.map": "/kufa/static/js/787.9d572da9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6879ce84.css",
-    "static/js/main.46c18c2f.js"
+    "static/js/main.a9b3320e.js"
   ]
 }
