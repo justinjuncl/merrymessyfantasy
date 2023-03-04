@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/kufa/static/css/main.6a518cb0.css",
-    "main.js": "/kufa/static/js/main.e0ac01fa.js",
-    "static/js/787.9d572da9.chunk.js": "/kufa/static/js/787.9d572da9.chunk.js",
-    "static/media/museum.glb": "/kufa/static/media/museum.673579649d7fa3eda6b6.glb",
-    "static/media/museum-lines.glb": "/kufa/static/media/museum-lines.cd7319c65409a87b98f2.glb",
-    "static/media/ku.svg": "/kufa/static/media/ku.002f2b5d1e912865387a85a235e1051a.svg",
-    "index.html": "/kufa/index.html",
-    "main.6a518cb0.css.map": "/kufa/static/css/main.6a518cb0.css.map",
-    "main.e0ac01fa.js.map": "/kufa/static/js/main.e0ac01fa.js.map",
-    "787.9d572da9.chunk.js.map": "/kufa/static/js/787.9d572da9.chunk.js.map"
+    "main.css": "/static/css/main.6a518cb0.css",
+    "main.js": "/static/js/main.445eb1d8.js",
+    "static/js/787.9d572da9.chunk.js": "/static/js/787.9d572da9.chunk.js",
+    "static/media/museum.glb": "/static/media/museum.673579649d7fa3eda6b6.glb",
+    "static/media/museum-lines.glb": "/static/media/museum-lines.cd7319c65409a87b98f2.glb",
+    "static/media/ku.svg": "/static/media/ku.002f2b5d1e912865387a85a235e1051a.svg",
+    "index.html": "/index.html",
+    "main.6a518cb0.css.map": "/static/css/main.6a518cb0.css.map",
+    "main.445eb1d8.js.map": "/static/js/main.445eb1d8.js.map",
+    "787.9d572da9.chunk.js.map": "/static/js/787.9d572da9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6a518cb0.css",
-    "static/js/main.e0ac01fa.js"
+    "static/js/main.445eb1d8.js"
   ]
 }
